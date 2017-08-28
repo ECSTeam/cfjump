@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER Ramiro Salas <rsalas@pivotal.io>
+MAINTAINER CGI 
 
 ENV HOME /home/ops
 ENV ENAML /opt/enaml
@@ -26,15 +26,17 @@ RUN mkdir -p $HOME/bin
 RUN cp -n /etc/skel/.[a-z]* .
 
 RUN cat /etc/apt/sources.list | sed 's/archive/us.archive/g' > /tmp/s && mv /tmp/s /etc/apt/sources.list
-
-RUN apt-get update && apt-get -y --no-install-recommends install wget curl
-RUN apt-get -y --no-install-recommends install ruby libroot-bindings-ruby-dev \
+RUN apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
+RUN apt-get update && apt-get -y --no-install-recommends install wget curl apt-transport-https
+RUN echo "deb [arch=amd64] http://packages.microsoft.com/repos/azure-cli/ wheezy main" | \
+     tee /etc/apt/sources.list.d/azure-cli.list
+RUN apt-get update && apt-get -y --no-install-recommends install ruby libroot-bindings-ruby-dev \
            build-essential git ssh zip software-properties-common dnsutils \
            iputils-ping traceroute jq vim wget unzip sudo iperf screen tmux \
            file openstack tcpdump nmap less s3cmd s3curl direnv \
            netcat npm nodejs-legacy python3-pip python3-setuptools \
            apt-utils libdap-bin mysql-client mongodb-clients postgresql-client-9.5 \
-           redis-tools libpython2.7-dev libxml2-dev libxslt-dev
+           redis-tools libpython2.7-dev libxml2-dev libxslt-dev azure-cli
 
 RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-xenial main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
