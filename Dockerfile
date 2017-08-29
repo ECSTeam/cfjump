@@ -49,6 +49,10 @@ RUN curl -L \
     "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" \
     | tar -C /usr/local/bin -zx
 
+# Install the Minio client
+RUN wget -O /usr/local/bin/mc https://dl.minio.io/client/mc/release/linux-amd64/mc && \
+    chmod +x /usr/local/bin/mc
+
 # Install the latest version of Hashicorp's Vault 
 RUN wget $(wget -O- -q https://www.vaultproject.io/downloads.html | grep linux_amd | awk -F "\"" '{print$2}') -O vault.zip && unzip vault.zip && cp vault /usr/local/bin/vault
 RUN chmod 755 /usr/local/bin/vault
