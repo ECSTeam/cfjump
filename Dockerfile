@@ -74,6 +74,11 @@ RUN cd /usr/local/bin && wget -q -O fly \
     "$(curl -s https://api.github.com/repos/concourse/fly/releases/latest \
     |jq --raw-output '.assets[] | .browser_download_url' | grep linux)" && chmod +x fly
 
+# Install the bosh-init binary
+RUN wget -O /usr/local/bin/bosh-init \
+    https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-"$(curl -s https://api.github.com/repos/cloudfoundry/bosh-init/releases/latest | jq -r '.name' | tr -d 'v')"-linux-amd64 && \
+    chmod +x /usr/local/bin/bosh-init
+
 # Install BOSH
 RUN gem install bosh_cli --no-ri --no-rdoc
 
@@ -113,7 +118,7 @@ RUN cd /usr/local/bin && wget -q -O - https://github.com/cloudfoundry-incubator/
 
 RUN cd /usr/local/bin && \
     curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
-    chmod 0755 kubectl
+    chmod +x kubectl
 
 ADD firstrun.sh /usr/local/bin
 ADD add_go.sh /usr/local/bin
