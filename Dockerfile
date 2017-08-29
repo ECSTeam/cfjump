@@ -86,7 +86,7 @@ RUN cd /usr/local/bin && wget -q -O cfops \
 
 RUN cd /usr/local/bin && wget -q -O spiff.zip \
     "$(curl -s https://api.github.com/repos/cloudfoundry-incubator/spiff/releases/latest \
-    | jq -r '.assets[] | select(.name == "spiff_linux_amd64.zip") | .browser_download_url')
+    | jq -r '.assets[] | select(.name == "spiff_linux_amd64.zip") | .browser_download_url')" \
     && unzip spiff.zip \
     && rm spiff.zip
 
