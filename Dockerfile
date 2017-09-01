@@ -33,11 +33,11 @@ RUN apt-get update && apt-get -y --no-install-recommends install ruby libroot-bi
            file openstack tcpdump nmap less s3cmd s3curl direnv \
            netcat npm nodejs-legacy python3-pip python3-setuptools \
            apt-utils libdap-bin mysql-client mongodb-clients postgresql-client-9.5 \
-           redis-tools libpython2.7-dev libxml2-dev libxslt-dev azure-cli telnet
+           redis-tools libpython2.7-dev libxml2-dev libxslt-dev azure-cli
 
 RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-xenial main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-RUN apt-get update && sudo apt-get -y --no-install-recommends install google-cloud-sdk
+RUN apt-get update && sudo apt-get -y --no-install-recommends install google-cloud-sdk telnet
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && python2.7 ./get-pip.py && rm -f python2.7 ./get-pip.py
 
