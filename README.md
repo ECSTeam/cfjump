@@ -41,7 +41,7 @@ v0.33 includes:
 - [Microsoft Azure CLI](https://github.com/Azure/azure-xplat-cli) (latest)
 - [Google Compute Cloud CLI](https://cloud.google.com/sdk/downloads#linux) (latest)
 - [AWS CLI](https://aws.amazon.com/cli/) (latest)
-- [Photon Controller](https://github.com/vmware/photon-controller) (latest) CLI 
+- [Photon Controller](https://github.com/vmware/photon-controller) (latest) CLI
 
 ##### Network virtualization
 - [`nsx-edge-gen`](https://github.com/cf-platform-eng/nsx-edge-gen) (latest) Generates NSX logical switches, Edge service gateways and LBs against the VMware NSX 6.3 API version.
@@ -57,7 +57,7 @@ v0.33 includes:
 
 ##### Extras
 
-If you need this extra apps, you must first install the Golang environment with the `add_go.sh` command and then run `add_extras.sh`. This is because these tools 
+If you need this extra apps, you must first install the Golang environment with the `add_go.sh` command and then run `add_extras.sh`. This is because these tools
 publish only source code and not binaries, and the decoupling was necessary to reduce the size of the Docker image.
 
 - [`cfdot`](https://github.com/cloudfoundry/cfdot)  CF Diego Operator Toolkit, a CLI tool designed to interact with Diego components.
@@ -70,12 +70,12 @@ publish only source code and not binaries, and the decoupling was necessary to r
 
 Cfjump runs instances as a regular unprivileged user. This container will create an internal user with uid and gid of 9024, so you will need to provide your `sudo` password to create a directory with this uid that can be mounted in the container.
 
-Step 1: 
+Step 1:
 ```
-wget https://raw.githubusercontent.com/RamXX/cfjump/master/cfj
+wget https://raw.githubusercontent.com/ECSTeam/cfjump/master/cfj
 chmod +x cfj
 sudo mv cfj /usr/local/bin
-docker pull ramxx/cfjump
+docker pull cgicloudnative/cfjump
 ```
 The usage of the `cfj` CLI is as follows:
 
@@ -98,16 +98,16 @@ version 1.8.1, but it can be easily adjusted to other versions as needed. See al
 You can just get this image from Docker Hub by running:
 
 ```
-docker pull ramxx/cfjump:latest
+docker pull cgicloudnative/cfjump:latest
 ```
-
 
 Or if you prefer to build it yourself:
 
 ```
-git clone https://github.com/RamXX/cfjump
+git clone git@github.com:ECSTeam/cfjump.git
 cd cfjump
-docker build -t ramxx/cfjump:latest .
+docker build -t cgicloudnative/cfjump:latest .
+docker push cgicloudnative/cfjump
 ```
 
 Note that you still need the `cfj` script from this repo. You can either `git clone` the repo or download the script directly.

@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER CGI 
+MAINTAINER CGI
 
 ENV HOME /home/ops
 ENV ENAML /opt/enaml
@@ -53,7 +53,7 @@ RUN curl -L \
 RUN wget -O /usr/local/bin/mc https://dl.minio.io/client/mc/release/linux-amd64/mc && \
     chmod +x /usr/local/bin/mc
 
-# Install the latest version of Hashicorp's Vault 
+# Install the latest version of Hashicorp's Vault
 RUN wget $(wget -O- -q https://www.vaultproject.io/downloads.html | grep linux_amd | awk -F "\"" '{print$2}') -O vault.zip && unzip vault.zip && cp vault /usr/local/bin/vault
 RUN chmod 755 /usr/local/bin/vault
 
@@ -68,10 +68,10 @@ RUN gem install cf-uaac --no-rdoc --no-ri
 
 RUN cd /usr/local/bin && wget -q -O om \
     "$(curl -s https://api.github.com/repos/pivotal-cf/om/releases/latest \
-    |jq --raw-output '.assets[] | .browser_download_url' | grep linux)" && chmod +x om 
+    |jq --raw-output '.assets[] | .browser_download_url' | grep linux)" && chmod +x om
 
 RUN cd /usr/local/bin && wget -q -O fly \
-    "$(curl -s https://api.github.com/repos/concourse/fly/releases/latest \
+    "$(curl -s https://api.github.com/repos/concourse/concourse/releases/latest \
     |jq --raw-output '.assets[] | .browser_download_url' | grep linux)" && chmod +x fly
 
 # Install the bosh-init binary
