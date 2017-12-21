@@ -70,9 +70,9 @@ RUN cd /usr/local/bin && wget -q -O om \
     "$(curl -s https://api.github.com/repos/pivotal-cf/om/releases/latest \
     |jq --raw-output '.assets[] | .browser_download_url' | grep linux)" && chmod +x om
 
-RUN cd /usr/local/bin && wget -q -O fly \
-    "$(curl -s https://api.github.com/repos/concourse/concourse/releases/latest \
-    |jq --raw-output '.assets[] | .browser_download_url' | grep linux)" && chmod +x fly
+RUN cd /usr/local/bin && url=$(curl -s "https://api.github.com/repos/concourse/concourse/releases/latest" \
+    | jq -r '.assets[] | select(.name | test("fly_linux_amd64")) | .browser_download_url') && \
+    curl -L "$url" -o fly && chmod +x fly
 
 # Install the bosh-init binary
 RUN wget -O /usr/local/bin/bosh-init \
